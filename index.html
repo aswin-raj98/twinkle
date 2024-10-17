@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link rel="icon" href="./happy_birthday_icon_228070.ico">
+    <style>     
+body {
+            
+    margin: 0;
+    padding: 0; 
+    background-image: url(./hbd.jpeg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding: 100px 20px;
+}
+
+h1 {
+    color: #1877f2;
+    font-size: 3em;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: floatUp 4s forwards infinite;
+}
+
+@keyframes floatUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.poppers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.popper {
+    position: absolute;
+    width: 650px; 
+    height: 650px;
+    background: url('popper.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: pop 1s forwards infinite;
+}
+#floating-numbers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+.floating-number {
+    position: absolute;
+    top: 100%;
+    font-size: 2em;
+    color: #1f75fe;
+    animation: floatUp 5s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
+
+@keyframes pop {
+    0% {
+        opacity: 1;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="birthday-message">Happy Birthday Twinkle! &#x1f499</h1>
+        <div id="poppers" class="poppers">
+            <!-- Poppers will be created dynamically -->
+        </div>
+        <div id="floating-numbers"></div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const floatingNumbersContainer = document.getElementById('floating-numbers'); 
+
+    function createFloatingNumber() {
+        const number = document.createElement('div');
+        number.textContent = 'Happy Birthday Twinkle!';
+        number.className = 'floating-number';
+
+        number.style.left = Math.random() * 100 + 'vw';
+        number.style.animationDuration = Math.random() * 2 + 3 + 's';
+
+        floatingNumbersContainer.appendChild(number);
+
+        setTimeout(() => {
+            number.remove();
+        }, 5000);
+    }
+
+    setInterval(createFloatingNumber, 500);
+});
+        document.addEventListener('DOMContentLoaded', () => {
+    const poppersContainer = document.getElementById('poppers');
+    const numPoppers = 20; // Number of poppers
+
+    for (let i = 0; i < numPoppers; i++) {
+        const popper = document.createElement('div');
+        popper.classList.add('popper');
+
+        // Randomize position
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+
+        popper.style.left = `${x}%`;
+        popper.style.top = `${y}%`;
+        popper.style.animationDelay = `${Math.random() * 2}s`;
+
+        poppersContainer.appendChild(popper);
+    }
+});
+    </script>
+</body>
+</html>
